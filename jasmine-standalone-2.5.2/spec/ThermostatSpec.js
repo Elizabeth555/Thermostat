@@ -44,7 +44,7 @@ describe ("testing temperature", function (){
   describe ("power saving off", function() {
 
     it ("can't go above 32 degrees", function(){
-      thermostat.powerSaving();
+      thermostat.isOnPowerSaving();
       for(var i =1; i< 14; i++) {
         thermostat.temperatureUp();
       };
@@ -63,8 +63,8 @@ describe ("testing temperature", function (){
       };
       expect(thermostat.usage()).toBe("Low-usage");
     });
-    it ("expects to be high, temp = => 25", function() {
-      thermostat.powerSaving();
+    it ("expects to be high, temp => 25", function() {
+      thermostat.isOnPowerSaving();
       for(var i =1; i< 6; i++) {
         thermostat.temperatureUp();
       };
