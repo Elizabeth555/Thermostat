@@ -3,7 +3,7 @@
 function Thermostat() {
   this.DEFAULT_TEMP = 20;
   this._temperature = this.DEFAULT_TEMP;
-  this._Powersaving = true;
+  this._powerSaving = true;
   this.MINIMUM_TEMPERATURE = 10;
   this.PSM_ON_MAX = 25;
   this.PSM_OFF_MAX = 32;
@@ -28,7 +28,7 @@ Thermostat.prototype.temperatureDown = function() {
 };
 
 Thermostat.prototype.isOnPowerSaving = function (){
-  this._Powersaving = !this._Powersaving;
+  this._powerSaving = !this._powerSaving;
 };
 
 Thermostat.prototype.reset = function () {
@@ -44,3 +44,26 @@ Thermostat.prototype.usage = function () {
   }
     return "High-usage";
 };
+
+$( document ).ready(function() {
+    var thermo = new Thermostat();
+
+    $( "#temp_up" ).click(function( event ) {
+      thermo.temperatureUp();
+      alert (thermo.temperature());
+    });
+
+    $( "#temp_down" ).click(function( event ) {
+      thermo.temperatureDown();
+      alert (thermo.temperature());
+    });
+
+    $( "#reset" ).click(function( event ) {
+      thermo.reset();
+      alert (thermo.temperature());
+    });
+
+    $( "#power_saving" ).click(function( event ) {
+      alert (thermo.isOnPowerSaving());
+    });
+});
