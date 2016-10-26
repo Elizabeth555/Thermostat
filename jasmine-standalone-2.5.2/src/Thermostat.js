@@ -16,15 +16,14 @@ Thermostat.prototype.temperature = function() {
 
 Thermostat.prototype.temperatureUp = function() {
   if (this._powerSaving) {
-    this._temperature =  this._temperature  < this.PSM_MAX ? this._temperature + 1 : 25;
+    this._temperature =  this._temperature < this.PSM_ON_MAX ? this._temperature + 1 : 25;
   } else {
-    this._temperature =  this._temperature  < this.PSM_OFF_MAX ? this._temperature + 1 : 32;
+    this._temperature =  this._temperature < this.PSM_OFF_MAX ? this._temperature + 1 : 32;
   }
 };
 
 Thermostat.prototype.temperatureDown = function() {
   this._temperature =  this._temperature  >  this.MINIMUM_TEMPERATURE ? this._temperature - 1 : 10;
-
 };
 
 Thermostat.prototype.isOnPowerSaving = function (){
@@ -42,28 +41,5 @@ Thermostat.prototype.usage = function () {
   if (this._temperature >= this.MEDIUM_USAGE && this._temperature < this.PSM_ON_MAX) {
     return "Medium-usage";
   }
-    return "High-usage";
+  return "High-usage";
 };
-
-$( document ).ready(function() {
-    var thermo = new Thermostat();
-
-    $( "#temp_up" ).click(function( event ) {
-      thermo.temperatureUp();
-      alert (thermo.temperature());
-    });
-
-    $( "#temp_down" ).click(function( event ) {
-      thermo.temperatureDown();
-      alert (thermo.temperature());
-    });
-
-    $( "#reset" ).click(function( event ) {
-      thermo.reset();
-      alert (thermo.temperature());
-    });
-
-    $( "#power_saving" ).click(function( event ) {
-      alert (thermo.isOnPowerSaving());
-    });
-});
